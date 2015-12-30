@@ -1,0 +1,198 @@
+# The 31 reserved Python keywords ("." indicates they are included in the example)
+# .and       del      from      .not       .while
+# as        .elif     global    .or        with
+# assert    .else     .if       .pass      yield
+# break     .except   .import   .print
+# class     exec      .in       raise
+# .continue finally   is        .return
+# .def      .for      lambda    .try
+
+# Arithmetic operators
+# +  -  *  /  ** (exponentiation)  % (modulus = remainder)
+
+# String operators
+# + (concatenation)
+
+# Special Values
+# True  False  None
+
+# Comparison Operators
+# ==   !=   >   <   >=   <=   is   is not
+
+# Logical Operators
+#
+
+# Data Structures
+# Lists
+# Dicstionaries
+# Tuples
+
+# Regular Expressions
+# Used to read through files, look for patterns, and extract various elements that are useful.
+# A regular expression is a sequence of characters that define a search pattern.
+# They are recognized by many search engines, text editiors, and text processors.
+# Many programming languages have regular expression capabilities built-in, including Perl, JavaScript and Ruby.
+# Python, Java and C++ require the developer to import a regular expression library. 
+# In Python this is accomplished with the statement "import re"
+# Whole books are written on these.
+# One place to learn about these is to look up "regular expressions" in Wikipedia.
+
+# Files
+
+# Using Web Services
+
+# Using Databases
+
+# Some Important Functions
+# inputString = .raw_input(promptString)
+# integerValue = .int(stringValue)
+# stringValue = .str(integerValue)
+# floatValue = .float(number)
+# max -- highest value in a list, which also gives the highest character in a string
+# min -- lowest value in a list, which also gives the loowest character in a string
+# len -- length of a string
+# "import random" then random.random() gives float between 0 and 1 / random.randin(lo,hi) /  random.choice(sequence)
+
+# Below are some reused functions for illustration
+def endProgram():
+	entry = raw_input('Press return to end this program')
+	
+def raiseToPower(factor, howMany):
+	product = 1
+	countUp = howMany
+	while countUp > 0:
+		product = product * factor
+		countUp = countUp - 1
+		
+	return (product)
+	
+def askForInt(lowVal, highVal, promptForVal, outOfBoundsMessage):
+	entrySucceeded = False
+	entryString = raw_input(promptForVal + '(between ' + str(lowVal) + ' and ' + str(highVal) + ') ')
+	while (entrySucceeded == False):
+		try:
+			returnVal = int(entryString)
+			if ((returnVal >= lowVal) and (not (returnVal > highVal))):
+				entrySucceeded = True
+				
+			else:
+				entryString = raw_input(outOfBoundsMessage + ' (between ' + str(lowVal) + ' and ' + str(highVal) + ') ')
+				
+		except:
+			entryString = raw_input(outOfBoundsMessage + ' (between ' + str(lowVal) + ' and ' + str(highVal) + ') ')
+			
+	return(returnVal)
+			
+# Which example should be run?
+example = askForInt(1, 20, 'Enter the number of the example you would like to execute', 'Incorrect entry. Please enter the number of the example you would like to execute')
+		
+# Example 1: Welcome a user
+if example == 1:
+	name = raw_input('What is your name, my friend? ')
+	print 'Welcome ' + name + ', my esteemed colleague.'
+	endProgram()
+# End of Example 1
+
+# Example 2: A program to find the most frequent word in a file
+elif example == 2:
+	name = raw_input('Enter name of file containing words on separate lines: ')
+	fileokay = None
+
+	while fileokay == None:
+		try:
+			handle = open(name, 'r')
+			fileokay = True
+		except:
+			name = raw_input('That file could not be opened.\nEnter name of a file containing words on separate lines: ')
+
+	text = handle.read()
+	words = text.split()
+
+# The following is just to examine what an array looks like
+	print words
+
+	counts = dict()
+
+	for word in words:
+		counts[word] = counts.get(word,0) + 1 # if word is not found in the ditionary get(word,0) returns 0
+
+# The following is just to examine what a dict looks like
+	print counts
+
+	bigcount = None
+	bigword = None
+
+	for word,count in counts.items():
+		if bigcount is None or count > bigcount:
+			bigword = word
+			bigcount = count
+
+	print bigword, bigcount
+	endProgram()
+# End of Example 2
+	
+# Example 3: Illustrate the "or" logical operator
+elif (example == 3) or (example ==4):
+		print('You entered ' + str(example) + ' which is one of either 3 or 4.')
+		endProgram()
+# End of Example 3 (which subsumes 4)
+	
+# Example 5: Illustrate the "pass" statement which stands in for a block that hasn't yet been written
+elif example == 5:
+		pass
+# End of Example 5
+
+# Example 6: Invoke a user specified function
+elif example == 6:
+	base = askForInt(1, 5, 'Enter an integer to exponentiate', 'Incorrect entry. Please enter an integer to exponentiate')	
+	power = askForInt(1, 3, 'The power to raise it to', 'Incorrect entry. Please enter the power to raise it to')
+	print raiseToPower(base, power)
+	endProgram()
+# End of Example 6
+
+# Example 7: Demonstrate exiting a loop with continue
+elif example == 7:
+	numberOfIters = 10
+	numberOfIncs = askForInt(1, 5, 'Enter an integer number of times to increment', 'Incorrect entry. Please enter an integer number of times to increment')	
+
+	while (numberOfIters >= 1):
+		numberOfIters = numberOfIters - 1
+		numberOfIncs = numberOfIncs - 1
+		if (numberOfIncs < 0):
+			continue
+		print (numberOfIters + 1)
+
+	print numberOfIters
+	print numberOfIncs
+	endProgram()
+# End of Example 7
+
+# Example 8: Demonstrate loop using for
+elif example == 8:
+	trio = ['John Smith', 'Sally Smith', 'Willie Smith']
+	for name in trio:
+		print name
+
+	endProgram()
+# End of Example 8		
+		
+# Example 9: Demonstrate use of strings
+elif example == 9:
+	longWord = 'antidisestablishmentarianism'
+	letter = longWord[4]
+	print letter
+	print len(longWord)
+	for char in longWord:
+		print char
+	print longWord[3:8]
+	print 'seed' in 'Appleseed'
+	stringVar = 'I am a string'
+	print dir(stringVar)
+# Look at https://docs.python.org/2/library/stdtypes.html#string-methods for more information 
+	
+	endProgram()
+# End of Example 9		
+		
+else:
+	print(str(example) + ' is not an example.')
+	endProgram()
